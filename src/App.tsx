@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Toaster } from 'react-hot-toast';
-import SearchBar from './components/SearchBar/SearchBar.jsx';
-import ImageGallery from './components/ImageGallery/ImageGallery.jsx';
-import Loader from './components/Loader/Loader.jsx';
-import ErrorMessage from './components/ErrorMessage/ErrorMessage.jsx';
-import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn.jsx';
-import ImageModal from './components/ImageModal/ImageModal.jsx';
+import SearchBar from './components/SearchBar/SearchBar';
+import ImageGallery from './components/ImageGallery/ImageGallery';
+import Loader from './components/Loader/Loader';
+import ErrorMessage from './components/ErrorMessage/ErrorMessage';
+import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn';
+import ImageModal from './components/ImageModal/ImageModal';
 import './App.css';
 
 const UNSPLASH_ACCESS_KEY = 'damSXsYO3haIF3zVdDRjFn4nmJjfuJu9B3PxqRSByT4';

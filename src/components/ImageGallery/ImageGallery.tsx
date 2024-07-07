@@ -1,4 +1,4 @@
-import ImageCard from '../ImageCard/ImageCard.jsx';
+import ImageCard from '../ImageCard/ImageCard';
 import './ImageGallery.css';
 
 const ImageGallery = ({ images, setSelectedImage }) => {
