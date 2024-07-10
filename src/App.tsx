@@ -8,17 +8,9 @@ import ErrorMessage from './components/ErrorMessage/ErrorMessage';
 import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn';
 import ImageModal from './components/ImageModal/ImageModal';
 import './App.css';
+import { Image, UnsplashResponse } from './unsplash';
 
 const UNSPLASH_ACCESS_KEY = 'damSXsYO3haIF3zVdDRjFn4nmJjfuJu9B3PxqRSByT4';
-
-interface Image {
-  id: string;
-  alt_description: string;
-  urls: {
-    small: string;
-    regular: string;
-  };
-}
 
 const App = () => {
   const [images, setImages] = useState<Image[]>([]);
@@ -31,7 +23,7 @@ const App = () => {
   const fetchImages = async (searchQuery: string, pageNumber: number) => {
     try {
       setLoading(true);
-      const response = await axios.get('https://api.unsplash.com/search/photos', {
+      const response = await axios.get<UnsplashResponse>('https://api.unsplash.com/search/photos', {
         params: {
           query: searchQuery,
           page: pageNumber,

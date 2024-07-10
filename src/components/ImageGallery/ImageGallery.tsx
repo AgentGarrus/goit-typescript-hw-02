@@ -1,21 +1,14 @@
+import React from 'react';
 import ImageCard from '../ImageCard/ImageCard';
 import './ImageGallery.css';
-
-interface Image {
-  id: string;
-  alt_description: string;
-  urls: {
-    small: string;
-    regular: string;
-  };
-}
+import { Image } from '../../unsplash';
 
 interface ImageGalleryProps {
   images: Image[];
   setSelectedImage: (image: Image) => void;
 }
 
-const ImageGallery = ({ images, setSelectedImage }: ImageGalleryProps) => {
+const ImageGallery: React.FC<ImageGalleryProps> = ({ images, setSelectedImage }) => {
   return (
     <ul className="image-gallery">
       {images.map((image) => (

@@ -1,20 +1,17 @@
+import React from 'react';
 import Modal from 'react-modal';
 import './ImageModal.css';
+import { Image } from '../../unsplash';
 
 Modal.setAppElement('#root');
 
 interface ImageModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  image: {
-    urls: {
-      regular: string;
-    };
-    alt_description: string;
-  } | null;
+  image: Image | null;
 }
 
-const ImageModal = ({ isOpen, onRequestClose, image }: ImageModalProps) => (
+const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onRequestClose, image }) => (
   <Modal
     isOpen={isOpen}
     onRequestClose={onRequestClose}
