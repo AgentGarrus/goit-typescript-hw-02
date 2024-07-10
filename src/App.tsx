@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Toaster } from 'react-hot-toast';
 import SearchBar from './components/SearchBar/SearchBar';
@@ -11,15 +11,24 @@ import './App.css';
 
 const UNSPLASH_ACCESS_KEY = 'damSXsYO3haIF3zVdDRjFn4nmJjfuJu9B3PxqRSByT4';
 
+interface Image {
+  id: string;
+  alt_description: string;
+  urls: {
+    small: string;
+    regular: string;
+  };
+}
+
 const App = () => {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<Image[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
-  const fetchImages = async (searchQuery, pageNumber) => {
+  const fetchImages = async (searchQuery: string, pageNumber: number) => {
     try {
       setLoading(true);
       const response = await axios.get('https://api.unsplash.com/search/photos', {
@@ -30,7 +39,7 @@ const App = () => {
         },
       });
       setImages((prevImages) =>
-        pageNumber === 1 ? response.data.results : [...prevImages, ...response.data.results]
+        pageNumber === 1 ? response.data.results : [...prevImages, ...response.data.results],
       );
       setError(null);
     } catch (error) {
@@ -40,7 +49,13 @@ const App = () => {
     }
   };
 
-  const handleSearchSubmit = (searchQuery) => {
+  useEffect(() => {
+    if (query) {
+      fetchImages(query, page);
+    }
+  }, [query, page]);
+
+  const handleSearchSubmit = (searchQuery: string) => {
     setQuery(searchQuery);
     setPage(1);
     fetchImages(searchQuery, 1);
@@ -48,7 +63,6 @@ const App = () => {
 
   const handleLoadMore = () => {
     setPage((prevPage) => prevPage + 1);
-    fetchImages(query, page + 1);
   };
 
   return (

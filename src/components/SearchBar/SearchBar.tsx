@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState, FormEvent, ChangeEvent } from 'react';
 import toast from 'react-hot-toast';
 
-const SearchBar = ({ onSubmit }) => {
+interface SearchBarProps {
+  onSubmit: (query: string) => void;
+}
+
+const SearchBar = ({ onSubmit }: SearchBarProps) => {
   const [query, setQuery] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     if (query.trim() === '') {
       toast.error('Please enter a search term');
@@ -19,7 +23,7 @@ const SearchBar = ({ onSubmit }) => {
         <input
           type="text"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
           placeholder="Search images and photos"
           autoFocus
           autoComplete="off"
